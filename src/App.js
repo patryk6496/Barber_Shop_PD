@@ -5,6 +5,9 @@ import Skin from './Components/Skin'
 import ProductSlider from './Components/ProductSlider'
 import Quotes from './Components/Quotes'
 import Team from './Components/Team'
+import PricingCard from './Components/PricingCard'
+import ContactForm from './Components/ContactForm'
+import Footer from './Components/Footer'
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
 	  <ProductSlider/>
 	  <Quotes/>
 	  <Team/>
+	  <PricingCard/>
+	  <ContactForm/>
+	  <Footer/>
     </div>
   );
 }
