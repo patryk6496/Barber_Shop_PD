@@ -2,81 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-	font-family: "MonumentExtend";
-	src: url("./Assets/Fonts/MonumentExtended-Regular.otf")
-  }
-
-  @font-face {
-	font-family: "MonumentExtend";
-	src: url("./Assets/Fonts/MonumentExtended-Ultrabold.otf")
-  }
-
-*{
-	font-family: Monument Extended;
+  font-family: 'MonumentExtend';
+  src: url('./Assets/Fonts/MonumentExtended-Regular.otf');
 }
 
-
-
-.container-header{
-	background-color: #131313;
+@font-face {
+  font-family: 'MonumentExtend';
+  src: url('./Assets/Fonts/MonumentExtended-Ultrabold.otf');
 }
 
-.orange-baner{
-	display: inline-flex;
-	transform: rotate(-2deg);
-	padding: 30px 100px 20px 100px;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	background: #F89369;
-	width: 100%;
-	min-height: 100px;
-	margin-top: -40px;
+* {
+  font-family: Monument Extended;
+}
+.role-team{
+	color: #f89369;
+}
+.quotes-container{
+  background-color: #f89369;
 }
 
-.orange-baner-text{
-	font-family: Monument Extended;
-	font-size: 110px;
-	font-weight: 400;
-	line-height: 90%; 
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	font-feature-settings: 'clig' off, 'liga' off;
+.container-header {
+  background-color: #131313;
+}
+
+.orange-baner {
+  display: inline-flex;
+  transform: rotate(-2deg);
+  padding: 30px 100px 20px 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #f89369;
+  width: 100%;
+  min-height: 100px;
+  margin-top: -40px;
 }
 
 /* Animations  */
 .svg-container {
-	position: relative;
-  }
+  position: relative;
+}
 
-  .svg-animation {
-	position: absolute;
-	top: -10px;
-	left: -10px;
-	transform: rotate(-10deg);
-	opacity: 0;
-	transition: opacity 0.3s ease, transform 0.3s ease;
-  }
+.svg-animation {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  transform: rotate(-10deg);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-  .svg-container:hover .svg-animation {
-	opacity: 1;
-	transform: rotate(-10deg) translateY(-5px);
-  }
+.svg-container:hover .svg-animation {
+  opacity: 1;
+  transform: rotate(-10deg) translateY(-5px);
+}
 
-  /* Adjusted styles for the container */
-  .text-container {
-	width: 350px; /* Adjust the width as needed */
-	height: 400px; /* Adjust the height as needed */
-  }
+/* Adjusted styles for the container */
+.text-container {
+  width: 350px; /* Adjust the width as needed */
+  height: 400px; /* Adjust the height as needed */
+}
 
-  /* Responsive styles for the images */
-  .image-container {
-	display: flex;
-	gap: 10px;
-  }
+/* Responsive styles for the images */
+.image-container {
+  display: flex;
+  gap: 10px;
+}
 
-  .image-container img {
-	width: 350px; /* Adjust the width as needed */
-	height: auto;
-	border-radius: 8px;
-  }
+.image-container img {
+  width: 350px; /* Adjust the width as needed */
+  height: auto;
+  border-radius: 8px;
+}
+/* fonts style for items  */
+.orange-baner-text {
+  font-size: 110px;
+  font-weight: 400;
+  line-height: 90%;
+  letter-spacing: 2px;
+}
+.heading-slider {
+  font-size: 55px;
+  font-weight: 400;
+  line-height: 55px; /* 100% */
+  letter-spacing: 1px;
+}
+
+.product-price {
+  color: #f89369;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 15px; /* 125% */
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 15px; /* 125% */
+}
+
+.quote {
+  font-size: 45px;
+  line-height: 130%; /* 58.5px */
+  letter-spacing: -0.3px;
+}
+
+.explain-quote{
+	font-size: 21px;
+	line-height: 150%; /* 31.5px */
+}
+
+.product-name,
+.product-price,
+.heading-slider,
+.orange-baner-text,
+.explain-quote,
+.explain-author,
+.author,
+.quote {
+  font-family: Monument Extended;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-feature-settings: 'clig' off, 'liga' off;
+}

@@ -8,6 +8,7 @@ import Team from './Components/Team'
 import PricingCard from './Components/PricingCard'
 import ContactForm from './Components/ContactForm'
 import Footer from './Components/Footer'
+import Beadr from './Components/Beard'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header/>
 	  <Shaving/>
 	  <Skin/>
+	  <Beadr/>
 	  <ProductSlider/>
 	  <Quotes/>
 	  <Team/>

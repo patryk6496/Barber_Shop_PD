@@ -1,59 +1,28 @@
-const posts = [
-  {
-    id: 1,
-    title: 'Fryzura',
-    description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
-    price: '30€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
-  },
-  {
-    id: 2,
-    title: 'Broda',
-    description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
-    price: '45€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
-  },
-  {
-    id: 3,
-    title: 'Strzyżenie',
-    description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
-    price: '20€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
-  },
-];
+import React from 'react';
+import '../App.css';
+import image1 from '../Assets/Images/Shaving_module/maszszynka-do-golenia.jpg';
+import image2 from '../Assets/Images/Shaving_module/golenie-brody.jpg';
 
 export default function Example() {
   return (
-	<div className="bg-white py-24 sm:py-32">
-	<div className="mx-auto max-w-7xl px-6 lg:px-8">
-	  <div className="mx-auto max-w-2xl lg:mx-0">
-		<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-		  From the blog
-		</h2>
-		<p className="mt-2 text-lg leading-8 text-gray-600">
-		  Learn how to grow your business with our expert advice.
-		</p>
-	  </div>
-	  <div className="mt-10 flex flex-col gap-8 lg:flex-row">
-		{posts.map((post) => (
-		  <article
-			key={post.id}
-			className="flex flex-col max-w-sm border border-gray-200 rounded-lg shadow-lg p-6 items-center"
-		  >
-			<h3 className="text-lg font-semibold leading-6 text-gray-900">
-			  <a href={post.href}>
-				<span className="absolute inset-0" />
-				{post.title}
-			  </a>
-			</h3>
-			<p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600">
-			  {post.description}
-			</p>
-			<div className="mt-4 flex items-center gap-x-4">
-			  <span className="text-xl font-semibold text-gray-900">
-				{post.price}
-			  </span>
-			  <a
+    <div className="bg-white">
+      <div className="orange-baner">
+        <span className="orange-baner-text">GOLENIE</span>
+      </div>
+      <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:flex lg:justify-between">
+        <div className="flex flex-col justify-center text-container">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            BRODA
+          </h2>
+          <p className="mt-4 text-gray-500">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
+            purus sit amet luctus venenatis, lectus magna fringilla urna,
+            porttitor rhoncus dolor purus non t aliquam, purus sit amet luctus
+            venenatis, lectus magna fringilla urna, porttitor rhoncus dolor
+            purus non.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
               href="#"
               className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
@@ -98,32 +67,21 @@ export default function Example() {
                 </svg>
               </div>
             </a>
-			</div>
-			<ul className="mt-4 space-y-2 text-gray-600">
-			  {post.features.map((feature) => (
-				<li key={feature} className="flex items-center gap-x-2">
-				  <svg
-					className="w-4 h-4 text-green-500"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					xmlns="http://www.w3.org/2000/svg"
-				  >
-					<path
-					  strokeLinecap="round"
-					  strokeLinejoin="round"
-					  strokeWidth="2"
-					  d="M5 13l4 4L19 7"
-					/>
-				  </svg>
-				  <span>{feature}</span>
-				</li>
-			  ))}
-			</ul>
-		  </article>
-		))}
-	  </div>
-	</div>
-  </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center image-container">
+          <img
+            src={image1}
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            src={image2}
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            className="rounded-lg bg-gray-100"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

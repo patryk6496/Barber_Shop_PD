@@ -1,28 +1,32 @@
 import React from 'react';
 import '../App.css';
-import image1 from '../Assets/Images/Shaving_module/maszszynka-do-golenia.jpg'
-import image2 from '../Assets/Images/Shaving_module/golenie-brody.jpg'
+import image1 from '../Assets/Images/Shearing_module/nozyczki.jpg';
+import image2 from '../Assets/Images/Shearing_module/strzyzenie.jpg';
 
 export default function Example() {
   return (
     <div className="bg-white">
       <div className="orange-baner">
-        <span className="orange-baner-text">STRZYŻENIE I GOLENIE</span>
+        <span className="orange-baner-text">STRZYŻENIE</span>
       </div>
       <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:flex lg:justify-between">
-  <div className="flex flex-col justify-center text-container">
-    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-      BRODA
-    </h2>
-    <p className="mt-4 text-gray-500">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non t aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non.
-    </p>
-    <div className="mt-10 flex items-center justify-center gap-x-6">
-      <a
-        href="#"
-        className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-      >
-        <div className="svg-container">
+        <div className="flex flex-col justify-center text-container">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            STRZYŻENIE
+          </h2>
+          <p className="mt-4 text-gray-500">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
+            purus sit amet luctus venenatis, lectus magna fringilla urna,
+            porttitor rhoncus dolor purus non t aliquam, purus sit amet luctus
+            venenatis, lectus magna fringilla urna, porttitor rhoncus dolor
+            purus non.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="#"
+              className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              <div className="svg-container">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="215"
@@ -65,19 +69,19 @@ export default function Example() {
             </a>
           </div>
         </div>
-		<div className="flex justify-center items-center image-container">
-    <img
-      src={image1}
-      alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-      className="rounded-lg bg-gray-100"
-    />
-    <img
-      src={image2}
-      alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-      className="rounded-lg bg-gray-100"
-    />
-  </div>
-</div>
+        <div className="flex justify-center items-center image-container">
+          <img
+            src={image1}
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            src={image2}
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            className="rounded-lg bg-gray-100"
+          />
+        </div>
+      </div>
     </div>
   );
 }
