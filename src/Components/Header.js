@@ -107,10 +107,10 @@ export default function Example() {
             <p className="mt-6 text-lg leading-8 text-white">
 				Masz ochotę przyciąć brodę, odświeżyć fryzurę i dać się rozpieścić? To jest miejsce dla Ciebie.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center gap-x-6 ">
               <a
                 href="#"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 "
               >
                 ZOBACZ WSZYSTKO
               </a>

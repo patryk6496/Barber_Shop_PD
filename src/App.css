@@ -20,6 +20,10 @@
 .quotes-container{
   background-color: #f89369;
 }
+.price-text{
+	color: #f89369;
+	font-size: x-large;
+}
 
 .container-header {
   background-color: #131313;
@@ -41,6 +45,7 @@
 /* Animations  */
 .svg-container {
   position: relative;
+  padding: 30px 0 10px 0;
 }
 
 .svg-animation {

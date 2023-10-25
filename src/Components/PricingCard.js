@@ -4,21 +4,21 @@ const posts = [
     title: 'Fryzura',
     description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
     price: '30€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    features: ['Analiza i masaż skóry głowy', 'Zastosowanie odpowiedniego produktu do pielęgnacji skóry', 'Strzyżenie włosów'],
   },
   {
     id: 2,
     title: 'Broda',
     description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
     price: '45€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    features: ['Analiza i masaż skóry głowy', 'Zastosowanie odpowiedniego produktu do pielęgnacji skóry', 'Strzyżenie włosów'],
   },
   {
     id: 3,
     title: 'Strzyżenie',
     description: 'Dodatek to zestaw funkcji premium, które można dodać do swojego formularza',
     price: '20€',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    features: ['Zastosowanie odpowiedniego produktu do pielęgnacji skóry', 'Strzyżenie włosów i brody', 'Analiza i masaż skóry głowy'],
   },
 ];
 
@@ -26,13 +26,10 @@ export default function Example() {
   return (
 	<div className="bg-white py-24 sm:py-32">
 	<div className="mx-auto max-w-7xl px-6 lg:px-8">
-	  <div className="mx-auto max-w-2xl lg:mx-0">
-		<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-		  From the blog
+	  <div className="mx-auto max-w-100% lg:mx-0">
+		<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">
+		  NASZE CENY
 		</h2>
-		<p className="mt-2 text-lg leading-8 text-gray-600">
-		  Learn how to grow your business with our expert advice.
-		</p>
 	  </div>
 	  <div className="mt-10 flex flex-col gap-8 lg:flex-row">
 		{posts.map((post) => (
@@ -42,18 +39,19 @@ export default function Example() {
 		  >
 			<h3 className="text-lg font-semibold leading-6 text-gray-900">
 			  <a href={post.href}>
-				<span className="absolute inset-0" />
+				<span className=" inset-0" />
 				{post.title}
 			  </a>
 			</h3>
-			<p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600">
+			<p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600 text-center">
 			  {post.description}
 			</p>
 			<div className="mt-4 flex items-center gap-x-4">
-			  <span className="text-xl font-semibold text-gray-900">
+			  <span className="text-xl font-semibold price-text">
 				{post.price}
 			  </span>
-			  <a
+			</div>
+			<a
               href="#"
               className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
@@ -98,7 +96,6 @@ export default function Example() {
                 </svg>
               </div>
             </a>
-			</div>
 			<ul className="mt-4 space-y-2 text-gray-600">
 			  {post.features.map((feature) => (
 				<li key={feature} className="flex items-center gap-x-2">
