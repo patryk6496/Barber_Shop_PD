@@ -9,8 +9,8 @@ export default function Example() {
       <div className="orange-baner">
         <span className="orange-baner-text">GOLENIE</span>
       </div>
-      <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:flex lg:justify-between">
-        <div className="flex flex-col justify-center text-container">
+      <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:flex lg:justify-between ">
+        <div className="flex flex-col justify-center text-container article-text">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             BRODA
           </h2>

@@ -31,7 +31,7 @@ export default function Example() {
 		  NASZE CENY
 		</h2>
 	  </div>
-	  <div className="mt-10 flex flex-col gap-8 lg:flex-row">
+	  <div className="mt-10 flex flex-col gap-8 lg:flex-row pricing-container">
 		{posts.map((post) => (
 		  <article
 			key={post.id}

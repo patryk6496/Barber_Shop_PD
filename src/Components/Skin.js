@@ -23,7 +23,7 @@ export default function Example() {
           />
         </div>
 
-        <div className="flex flex-col justify-center text-container">
+        <div className="flex flex-col justify-center text-container article-text">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             SKÓRA
           </h2>
