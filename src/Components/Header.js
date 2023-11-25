@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import '../App.css'
+import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Nasze Produkty', href: '#' },
@@ -40,9 +41,9 @@ export default function Example() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
-              Umów się na wizyte <span aria-hidden="true">&rarr;</span>
-            </a>
+		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+  Umów się na wizyte <span aria-hidden="true">&rarr;</span>
+</Link>
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -75,12 +76,9 @@ export default function Example() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-black hover:bg-gray-50"
-                  >
-                    Umów się na wizyte
-                  </a>
+				<Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+  Umów się na wizyte <span aria-hidden="true">&rarr;</span>
+</Link>
                 </div>
               </div>
             </div>
