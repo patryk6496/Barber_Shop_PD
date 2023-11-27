@@ -41,6 +41,18 @@ export default function Example() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+		  <Link to="/rejestracja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+  Zarejestruj się <span aria-hidden="true">&rarr;</span>
+</Link>
+          </div>
+
+		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+		  <Link to="/logowanie" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+  Zaloguj się <span aria-hidden="true">&rarr;</span>
+</Link>
+          </div>
+
+		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
 		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
   Umów się na wizyte <span aria-hidden="true">&rarr;</span>
 </Link>
@@ -75,9 +87,21 @@ export default function Example() {
                     </a>
                   ))}
                 </div>
+
+				<div className="py-6">
+				<Link to="/rejestracja" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+  Zarejestruj się <span aria-hidden="true">&rarr;</span>
+</Link>
+                </div>
                 <div className="py-6">
-				<Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
-  Umów się na wizyte <span aria-hidden="true">&rarr;</span>
+				<Link to="/logowanie" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+  Zaloguj się <span aria-hidden="true">&rarr;</span>
+</Link>
+                </div>
+
+				<div className="py-6">
+				<Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+				Umów się na wizyte <span aria-hidden="true">&rarr;</span>
 </Link>
                 </div>
               </div>

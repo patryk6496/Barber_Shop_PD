@@ -77,6 +77,49 @@ app.post('/api/rezerwacje', async (req, res) => {
   }
 });
 
+// Endpoint do dodawania rejestracji uzytkownika
+app.post('/api/register', async (req, res) => {
+	const { username, password } = req.body;
+  
+	try {
+	  // Hashowanie hasła
+	  const hashedPassword = await bcrypt.hash(password, 10);
+  
+	  // Zapisz użytkownika w bazie danych (zastąp to odpowiednim kodem)
+	  // ...
+  
+	  res.status(201).send("Użytkownik utworzony");
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).send("Błąd serwera");
+	}
+  });
+
+// Endpoint do logowania uzytkownika
+  app.post('/api/login', async (req, res) => {
+	const { username, password } = req.body;
+  
+	try {
+	  // Pobierz użytkownika z bazy danych (zastąp to odpowiednim kodem)
+	  // ...
+  
+	  // Sprawdź hasło
+	  const isValid = await bcrypt.compare(password, userFromDatabase.hashedPassword);
+  
+	  if (!isValid) {
+		return res.status(401).send("Nieprawidłowe dane logowania");
+	  }
+  
+	  // Generowanie tokena JWT
+	  const token = jwt.sign({ userId: userFromDatabase.id }, 'tajnyKlucz', { expiresIn: '24h' });
+	  res.json({ token });
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).send("Błąd serwera");
+	}
+  });
+  
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);

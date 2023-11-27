@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home'; // Upewnij się, że ścieżka do importu jest poprawna
 import ReservationSystem from './Components/ReservationSystem'; // Upewnij się, że ścieżka do importu jest poprawna
 import './App.css';
-// Importuj inne komponenty, jeśli są potrzebne
+import LoginRegisterForm from './Components/LoginRegisterForm';
+import LoginForm from './Components/LoginForm';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/rezerwacja" element={<ReservationSystem />} />
-          {/* Dodaj więcej ścieżek w razie potrzeby */}
+		  <Route path="/rejestracja" element={<LoginRegisterForm />} />
+		  <Route path="/logowanie" element={<LoginForm />} />
         </Routes>
         {/* Footer również powinien być poza <Routes> */}
        
