@@ -1,6 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const navigate = useNavigate(); // Inicjalizacja useNavigate
+  
+	const handleEmailChange = (event) => {
+	  setEmail(event.target.value);
+	};
+  
+	const handlePasswordChange = (event) => {
+	  setPassword(event.target.value);
+	};
+  
+	const handleSubmit = (event) => {
+	  event.preventDefault();
+	  fetch('/api/login', {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email, password }), // Uwaga: upewnij się, że backend oczekuje `email`, a nie `username`
+	  })
+	  .then(response => {
+		if (!response.ok) {
+		  throw new Error('Błąd logowania');
+		}
+		return response.json();
+	  })
+	  .then(data => {
+		localStorage.setItem('token', data.token);
+		console.log('Zalogowano'); // Wyświetlenie komunikatu w konsoli
+		navigate('/'); // Przekierowanie do strony głównej
+	  })
+	  .catch(error => {
+		console.error('Error:', error);
+		console.log('Błąd logowania'); // Wyświetlenie komunikatu o błędzie
+	  });
+	};
+
+	  
+	  
   return (
 <>
       {/*
@@ -24,20 +65,21 @@ const LoginForm = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
               <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+			  <input
+  id="email"
+  name="email"
+  type="email"
+  autoComplete="email"
+  required
+  onChange={handleEmailChange} // Dodaj tę linię
+  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+/>
               </div>
             </div>
 
@@ -53,14 +95,15 @@ const LoginForm = () => {
                 </div>
               </div>
               <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+			  <input
+  id="password"
+  name="password"
+  type="password"
+  autoComplete="current-password"
+  required
+  onChange={handlePasswordChange} // Dodaj tę linię
+  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+/>
               </div>
             </div>
 
@@ -69,7 +112,7 @@ const LoginForm = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+               Zaloguj się
               </button>
             </div>
           </form>

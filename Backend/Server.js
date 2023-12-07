@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./Database'); // Załóżmy, że ten plik istnieje i jest prawidłowo skonfigurowany
+const pool = require('./Database');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -95,29 +97,32 @@ app.post('/api/register', async (req, res) => {
 	}
   });
 
-// Endpoint do logowania uzytkownika
-  app.post('/api/login', async (req, res) => {
-	const { username, password } = req.body;
+// Endpoint do logowania użytkownika
+app.post('/api/login', async (req, res) => {
+	const { email, password } = req.body;
   
 	try {
-	  // Pobierz użytkownika z bazy danych (zastąp to odpowiednim kodem)
-	  // ...
+	  const userQuery = await pool.query('SELECT * FROM uzytkownicy WHERE email = $1', [email]);
+	  const user = userQuery.rows[0];
   
-	  // Sprawdź hasło
-	  const isValid = await bcrypt.compare(password, userFromDatabase.hashedPassword);
-  
-	  if (!isValid) {
-		return res.status(401).send("Nieprawidłowe dane logowania");
+	  if (!user) {
+		return res.status(401).json({ error: "Nieprawidłowy email lub hasło" });
 	  }
   
-	  // Generowanie tokena JWT
-	  const token = jwt.sign({ userId: userFromDatabase.id }, 'tajnyKlucz', { expiresIn: '24h' });
+	  // Proste porównanie zamiast bcrypt.compare
+	  if (password !== user.haslo) {
+		return res.status(401).json({ error: "Nieprawidłowy email lub hasło" });
+	  }
+  
+	  const token = jwt.sign({ userId: user.id }, 'tajnyKlucz', { expiresIn: '24h' });
 	  res.json({ token });
 	} catch (error) {
 	  console.error(error);
 	  res.status(500).send("Błąd serwera");
 	}
   });
+  
+
   
 
 const port = process.env.PORT || 3001;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import '../App.css'
@@ -12,7 +12,21 @@ const navigation = [
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    // Sprawdź, czy token jest przechowywany w localStorage (lub innym mechanizmie)
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    // Dodatkowe czynności po wylogowaniu, np. przekierowanie
+  };
   return (
     <div className="container-header">
       <header className="absolute inset-x-0 top-0 z-50 ">
@@ -40,17 +54,30 @@ export default function Example() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-		  <Link to="/rejestracja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
-  Zarejestruj się <span aria-hidden="true">&rarr;</span>
-</Link>
-          </div>
+         
 
-		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-		  <Link to="/logowanie" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
-  Zaloguj się <span aria-hidden="true">&rarr;</span>
-</Link>
-          </div>
+		  {isLoggedIn ? (
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link to="/panel-konta" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+            Panel Konta <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <button 
+            onClick={handleLogout}
+            className="text-sm font-semibold leading-6 text-white hover:text-orange-500 ml-4"
+          >
+            Wyloguj się
+          </button>
+        </div>
+      ) : (
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link to="/rejestracja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+            Zarejestruj się <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link to="/logowanie" className="text-sm font-semibold leading-6 text-white hover:text-orange-500 ml-4">
+            Zaloguj się <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
+      )}
 
 		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
 		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
@@ -88,24 +115,34 @@ export default function Example() {
                   ))}
                 </div>
 
-				<div className="py-6">
-				<Link to="/rejestracja" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
-  Zarejestruj się <span aria-hidden="true">&rarr;</span>
-</Link>
+				{isLoggedIn ? (
+              <div className="py-6">
+                <Link to="/panel-konta" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+                  Panel Konta <span aria-hidden="true">&rarr;</span>
+                </Link>
+                <button 
+                  onClick={handleLogout}
+                  className="mt-6 block text-sm font-semibold leading-6 text-black hover:text-orange-500"
+                >
+                  Wyloguj się
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="py-6">
+                  <Link to="/rejestracja" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+                    Zarejestruj się <span aria-hidden="true">&rarr;</span>
+                  </Link>
                 </div>
                 <div className="py-6">
-				<Link to="/logowanie" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
-  Zaloguj się <span aria-hidden="true">&rarr;</span>
-</Link>
+                  <Link to="/logowanie" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
+                    Zaloguj się <span aria-hidden="true">&rarr;</span>
+                  </Link>
                 </div>
-
-				<div className="py-6">
-				<Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
-				Umów się na wizyte <span aria-hidden="true">&rarr;</span>
-</Link>
-                </div>
-              </div>
-            </div>
+              </>
+            )}
+          </div>
+        </div>
           </Dialog.Panel>
         </Dialog>
       </header>
