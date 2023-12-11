@@ -33,6 +33,7 @@ const LoginForm = () => {
 	  })
 	  .then(data => {
 		localStorage.setItem('token', data.token);
+		localStorage.setItem('userId', data.userId);
 		console.log('Zalogowano'); // Wyświetlenie komunikatu w konsoli
 		toast.success('Zalogowano pomyślnie');
 		navigate('/'); // Przekierowanie do strony głównej

@@ -121,14 +121,38 @@ app.post('/api/login', async (req, res) => {
 	  }
   
 	  const token = jwt.sign({ userId: user.id }, 'tajnyKlucz', { expiresIn: '24h' });
-	  res.json({ token });
+	  res.json({ token, userId: user.id });
 	} catch (error) {
 	  console.error(error);
 	  res.status(500).send("Błąd serwera");
 	}
   });
   
+  app.post('/api/change-password', async (req, res) => {
+	const { userId, oldPassword, newPassword } = req.body;
 
+	// Logowanie otrzymanych danych
+	console.log('Otrzymane dane:', { userId, oldPassword, newPassword });
+  
+	try {
+	  // Pobierz dane użytkownika z bazy danych
+	  const userQuery = await pool.query('SELECT * FROM uzytkownicy WHERE id = $1', [userId]);
+	  const user = userQuery.rows[0];
+  
+	  // Sprawdź, czy stare hasło jest poprawne
+	  if (user && user.password === oldPassword) {
+		// Aktualizuj hasło na nowe
+		await pool.query('UPDATE uzytkownicy SET password = $1 WHERE id = $2', [newPassword, userId]);
+		res.status(200).send('Hasło zostało zmienione');
+	  } else {
+		res.status(400).send('Nieprawidłowe stare hasło');
+	  }
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).send('Błąd serwera');
+	}
+  });
+  
   
 
 const port = process.env.PORT || 3001;
