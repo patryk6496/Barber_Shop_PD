@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
@@ -32,6 +34,7 @@ const LoginForm = () => {
 	  .then(data => {
 		localStorage.setItem('token', data.token);
 		console.log('Zalogowano'); // Wyświetlenie komunikatu w konsoli
+		toast.success('Zalogowano pomyślnie');
 		navigate('/'); // Przekierowanie do strony głównej
 	  })
 	  .catch(error => {

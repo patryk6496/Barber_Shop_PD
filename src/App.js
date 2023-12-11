@@ -5,6 +5,8 @@ import ReservationSystem from './Components/ReservationSystem'; // Upewnij się,
 import './App.css';
 import LoginRegisterForm from './Components/LoginRegisterForm';
 import LoginForm from './Components/LoginForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
         {/* Footer również powinien być poza <Routes> */}
        
       </div>
+	  <ToastContainer />
     </Router>
   );
 }

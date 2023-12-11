@@ -81,21 +81,27 @@ app.post('/api/rezerwacje', async (req, res) => {
 
 // Endpoint do dodawania rejestracji uzytkownika
 app.post('/api/register', async (req, res) => {
-	const { username, password } = req.body;
+	const { email, password } = req.body;
   
 	try {
-	  // Hashowanie hasła
-	  const hashedPassword = await bcrypt.hash(password, 10);
-  
 	  // Zapisz użytkownika w bazie danych (zastąp to odpowiednim kodem)
-	  // ...
+	  await pool.query('INSERT INTO uzytkownicy (email, password) VALUES ($1, $2)', [email, password]);
   
-	  res.status(201).send("Użytkownik utworzony");
-	} catch (error) {
-	  console.error(error);
-	  res.status(500).send("Błąd serwera");
-	}
-  });
+  // Pobranie informacji o użytkowniku, aby uzyskać jego ID do tokenu
+  const userQuery = await pool.query('SELECT * FROM uzytkownicy WHERE email = $1', [email]);
+  const user = userQuery.rows[0];
+
+  // Generowanie tokena JWT
+  const token = jwt.sign({ userId: user.id }, 'tajnyKlucz', { expiresIn: '24h' });
+
+  // Zwracanie tokena w odpowiedzi
+  res.json({ token });
+} catch (error) {
+  console.error(error);
+  res.status(500).send("Błąd serwera");
+}
+});
+  
 
 // Endpoint do logowania użytkownika
 app.post('/api/login', async (req, res) => {
@@ -110,7 +116,7 @@ app.post('/api/login', async (req, res) => {
 	  }
   
 	  // Proste porównanie zamiast bcrypt.compare
-	  if (password !== user.haslo) {
+	  if (password !== user.password) {
 		return res.status(401).json({ error: "Nieprawidłowy email lub hasło" });
 	  }
   

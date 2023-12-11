@@ -3,6 +3,8 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import '../App.css'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const navigation = [
   { name: 'Nasze Produkty', href: '#' },
@@ -25,6 +27,7 @@ export default function Example() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+	toast.info('Wylogowano pomyślnie');
     // Dodatkowe czynności po wylogowaniu, np. przekierowanie
   };
   return (
