@@ -152,6 +152,40 @@ app.post('/api/login', async (req, res) => {
 	  res.status(500).send('Błąd serwera');
 	}
   });
+
+
+//Endpoint pobierania twoich wizyt w panelu
+app.get('/api/wizyty/:id_uzytkownika', async (req, res) => {
+	const { id_uzytkownika } = req.params;
+  
+	try {
+	  const rezerwacje = await pool.query(
+		`SELECT
+		  r.id,
+		  to_char(r.data_i_czas, 'YYYY-MM-DD') AS data,
+		  to_char(r.data_i_czas, 'HH24:MI') AS czas,
+		  fr.imie_nazwisko AS fryzjer,
+		  fr.specjalizacje,
+		  fr.godziny_pracy,
+		  u.nazwa AS nazwa_uslugi,
+		  r.komentarz,
+		  u.cena
+		FROM rezerwacje r
+		INNER JOIN fryzjerzy fr ON r.id_fryzjera = fr.id
+		INNER JOIN uslugi u ON r.id_uslugi = u.id
+		WHERE r.id_uzytkownika = $1`,
+		[id_uzytkownika]
+	  );
+	  res.json(rezerwacje.rows);
+	} catch (err) {
+	  console.error(err.message);
+	  res.status(500).send('Błąd serwera');
+	}
+  });
+  
+  
+  
+
   
   
 

@@ -1,6 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AccountPanel = () => {
+
+	const [rezerwacje, setRezerwacje] = useState([]);
+
+  useEffect(() => {
+    const fetchRezerwacje = async () => {
+      try {
+        const userId = localStorage.getItem('userId'); // Pobierz ID użytkownika
+        if (userId) {
+          const response = await fetch(`/api/wizyty/${userId}`);
+          if (!response.ok) {
+            throw new Error('Nie udało się pobrać danych o wizytach');
+          }
+          const data = await response.json();
+          setRezerwacje(data);
+        }
+      } catch (error) {
+        console.error('Błąd podczas pobierania wizyt:', error);
+      }
+    };
+
+    fetchRezerwacje();
+  }, []);
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
@@ -77,14 +100,33 @@ const AccountPanel = () => {
           </div>
 
           <div className="p-6">
-            <h2 className="text-xl font-semibold">Twoje Najbliższe Wizyty</h2>
-            <div className="mt-4"></div>
-          </div>
+        <h2 className="text-xl font-semibold">Twoje Najbliższe Wizyty</h2>
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3">Data</th>
+              <th scope="col" className="px-6 py-3">Czas</th>
+              <th scope="col" className="px-6 py-3">Nazwa Usługi</th>
+              <th scope="col" className="px-6 py-3">Fryzjer</th>
+              <th scope="col" className="px-6 py-3">Cena</th>
+              <th scope="col" className="px-6 py-3">Komentarz</th>
+            </tr>
+          </thead>
+          <tbody>
+  {rezerwacje.map((rez) => (
+    <tr key={rez.id} className="bg-white border-b">
+      <td className="px-6 py-4">{rez.data}</td> {/* Kolumna dla daty */}
+      <td className="px-6 py-4">{rez.czas}</td> {/* Kolumna dla czasu */}
+      <td className="px-6 py-4">{rez.nazwa_uslugi}</td>
+      <td className="px-6 py-4">{rez.fryzjer}</td>
+      <td className="px-6 py-4">{rez.cena}</td>
+      <td className="px-6 py-4">{rez.komentarz}</td>
+    </tr>
+  ))}
+</tbody>
 
-          <div className="p-6">
-            <h2 className="text-xl font-semibold">Historia Wizyt</h2>
-            <div className="mt-4"></div>
-          </div>
+        </table>
+      </div>
         </div>
       </div>
     </div>
