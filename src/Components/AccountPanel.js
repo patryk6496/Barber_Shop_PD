@@ -112,18 +112,25 @@ const AccountPanel = () => {
               <th scope="col" className="px-6 py-3">Komentarz</th>
             </tr>
           </thead>
-          <tbody>
-  {rezerwacje.map((rez) => (
-    <tr key={rez.id} className="bg-white border-b">
-      <td className="px-6 py-4">{rez.data}</td> {/* Kolumna dla daty */}
-      <td className="px-6 py-4">{rez.czas}</td> {/* Kolumna dla czasu */}
-      <td className="px-6 py-4">{rez.nazwa_uslugi}</td>
-      <td className="px-6 py-4">{rez.fryzjer}</td>
-      <td className="px-6 py-4">{rez.cena}</td>
-      <td className="px-6 py-4">{rez.komentarz}</td>
+		  <tbody>
+  {rezerwacje.length > 0 ? (
+    rezerwacje.map((rez) => (
+      <tr key={rez.id} className="bg-white border-b">
+        <td className="px-6 py-4">{rez.data}</td>
+        <td className="px-6 py-4">{rez.czas}</td>
+        <td className="px-6 py-4">{rez.nazwa_uslugi}</td>
+        <td className="px-6 py-4">{rez.nazwa_fryzjera}</td>
+        <td className="px-6 py-4">{rez.cena}</td>
+        <td className="px-6 py-4">{rez.komentarz}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6" className="px-6 py-4 text-center">Nie masz jeszcze wizyt.</td>
     </tr>
-  ))}
+  )}
 </tbody>
+
 
         </table>
       </div>
