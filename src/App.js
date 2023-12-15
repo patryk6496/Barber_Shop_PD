@@ -6,6 +6,7 @@ import ReservationSystem from './Components/ReservationSystem'; // Upewnij się,
 import LoginRegisterForm from './Components/LoginRegisterForm';
 import LoginForm from './Components/LoginForm';
 import AccountPanel from './Components/AccountPanel'
+import CartPage from './Components/CartPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,6 +22,7 @@ function App() {
 		  <Route path="/rejestracja" element={<LoginRegisterForm />} />
 		  <Route path="/logowanie" element={<LoginForm />} />
 		  <Route path="/panel-konta" element={<AccountPanel />} />
+		  <Route path="/koszyk" element={<CartPage />} />
         </Routes>
         {/* Footer również powinien być poza <Routes> */}
        

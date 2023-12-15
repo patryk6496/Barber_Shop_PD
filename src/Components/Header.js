@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import '../App.css'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,24 +12,47 @@ const navigation = [
   { name: 'Nasze Ceny', href: '#' },
 ]
 
-export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Header = () => {
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [cartItems, setCartItems] = useState([]);
+	const [isCartHovered, setIsCartHovered] = useState(false);
+  
+	useEffect(() => {
+	  // Załóżmy, że userId pochodzi z autentykacji/logowania
+	  const userId = "exampleUserId";
+	  fetch(`/api/koszyk/${userId}`)
+		.then(response => response.json())
+		.then(data => setCartItems(data))
+		.catch(error => console.error('Error:', error));
+  
+	  const token = localStorage.getItem('token');
+	  if (token) {
+		setIsLoggedIn(true);
+	  }
+	}, []);
+  
+	const handleLogout = () => {
+	  localStorage.removeItem('token');
+	  setIsLoggedIn(false);
+	  toast.info('Wylogowano pomyślnie');
+	};
 
-  useEffect(() => {
-    // Sprawdź, czy token jest przechowywany w localStorage (lub innym mechanizmie)
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+	const fetchCartItems = async () => {
+		const userId = localStorage.getItem('userId');
+		if (!userId) return;
+	
+		try {
+		  const response = await fetch(`/api/koszyk/${userId}`);
+		  const data = await response.json();
+		  setCartItems(data);
+		} catch (error) {
+		  console.error('Błąd podczas pobierania danych koszyka:', error);
+		}
+	  };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-	toast.info('Wylogowano pomyślnie');
-    // Dodatkowe czynności po wylogowaniu, np. przekierowanie
-  };
+	  console.log('isCartHovered:', isCartHovered); // Dodaj tę linię do debugowania
+
   return (
     <div className="container-header">
       <header className="absolute inset-x-0 top-0 z-50 ">
@@ -83,6 +106,34 @@ export default function Example() {
       )}
 
 		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+
+		  <div className="cart-icon"
+    onMouseEnter={() => {
+        setIsCartHovered(true);
+        fetchCartItems(); // Upewnij się, że ta funkcja działa prawidłowo
+        // Dodaj logikę aktualizacji liczby produktów w koszyku tutaj
+    }}
+    onMouseLeave={() => setIsCartHovered(false)}
+>
+    <Link to="/koszyk" className="mr-4 text-white hover:text-orange-500">
+        <ShoppingCartIcon className="h-6 w-6" />
+        <span>Koszyk ({cartItems.length})</span>
+    </Link>
+    {isCartHovered && (
+        <div className="cart-dropdown">
+            {cartItems.length > 0 ? (
+                <ul>
+                    {cartItems.map((item, index) => (
+                        <li key={index}>{item.name} - {item.price}</li>
+                    ))}
+                </ul>
+            ) : (
+                <p>Twój koszyk jest pusty</p>
+            )}
+        </div>
+    )}
+</div>
+
 		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
   Umów się na wizyte <span aria-hidden="true">&rarr;</span>
 </Link>
@@ -183,3 +234,4 @@ export default function Example() {
     </div>
   )
 }
+export default Header;

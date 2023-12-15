@@ -13,7 +13,8 @@ const products = [
     href: '#',
     imageSrc: image1,
     imageAlt: 'Olejek pilęgnacyjny',
-    price: '$35',
+    price: '35',
+	currency: 'zł'
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ const products = [
     href: '#',
     imageSrc: image2,
     imageAlt: 'Szczotka do brody',
-    price: '$35',
+    price: '35',
+	currency: 'zł'
   },
   {
     id: 3,
@@ -29,7 +31,8 @@ const products = [
     href: '#',
     imageSrc: image3,
     imageAlt: 'Wosk do brody',
-    price: '$35',
+    price: '35',
+	currency: 'zł'
   },
   {
     id: 4,
@@ -37,7 +40,8 @@ const products = [
     href: '#',
     imageSrc: image1,
     imageAlt: 'Olejek pilęgnacyjnyy',
-    price: '$35',
+    price: '35',
+	currency: 'zł'
   },
   {
     id: 5,
@@ -45,7 +49,8 @@ const products = [
     href: '#',
     imageSrc: image2,
     imageAlt: 'Szczotka do brody',
-    price: '$35',
+    price: '35',
+	currency: 'zł'
   },
 ];
 
@@ -78,36 +83,74 @@ export default function Example() {
     ],
   };
 
+  const handleAddToCart = async (product) => {
+    const userId = localStorage.getItem('userId'); // Pobierz userId z localStorage
+    if (!userId) {
+      console.error('Użytkownik nie jest zalogowany');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/koszyk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, product }),
+      });
+
+      if (response.ok) {
+        console.log('Produkt dodany do koszyka');
+      } else {
+        console.error('Błąd przy dodawaniu do koszyka');
+      }
+    } catch (error) {
+      console.error('Błąd', error);
+    }
+  };
+  
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="heading-slider">NASZE PRODUKTY</h2>
 
         <div className="mt-6">
-          <Slider {...settings}>
-            {products.map((product) => (
-              <div key={product.id} className="group relative px-4">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
-                  <img
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="product-name">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                      </a>
-                    </h3>
-                  </div>
-                  <p className="product-price">{product.price}</p>
-                </div>
-              </div>
-            ))}
-          </Slider>
+		<Slider {...settings}>
+  {products.map((product) => (
+    <div key={product.id} className="px-4 py-2">
+      {/* Kontener karty produktu */}
+      <div className="group relative">
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
+          <img
+            src={product.imageSrc}
+            alt={product.imageAlt}
+            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+          />
+        </div>
+        <div className="mt-4 flex justify-between">
+          <div>
+            <h3 className="product-name">
+              <a href={product.href}>
+                <span aria-hidden="true" className="absolute inset-0" />
+                {product.name}
+              </a>
+            </h3>
+          </div>
+		  <p className="product-price">{product.price} {product.currency}</p>
+        </div>
+      </div>
+      {/* Przycisk umieszczony poza kontenerem 'group' */}
+      <button 
+              onClick={() => handleAddToCart(product)}
+              className="mt-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Dodaj do zamówienia
+            </button>
+    </div>
+  ))}
+</Slider>
+
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
               href="#"

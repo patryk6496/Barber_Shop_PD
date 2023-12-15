@@ -182,14 +182,48 @@ app.get('/api/wizyty/:id_uzytkownika', async (req, res) => {
 	  res.status(500).send('Błąd serwera');
 	}
   });
-  
-  
-  
 
-  
-  
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);
 });
+
+//Endpoint do robienia zamowienia
+app.post('/api/zamowienia', async (req, res) => {
+	const { userId, productId, price } = req.body;
+	try {
+	  // Dodaj zamówienie do bazy danych
+	  const noweZamowienie = await pool.query(
+		'INSERT INTO zamowienia (id_uzytkownika, id_produktu, wartosc_zamowienia) VALUES ($1, $2, $3) RETURNING *',
+		[userId, productId, price]
+	  );
+	  res.json(noweZamowienie.rows[0]);
+	} catch (err) {
+	  console.error(err.message);
+	  res.status(500).send('Błąd serwera');
+	}
+  });
+
+
+  // Endpoint do koszyka
+let cartData = {};
+
+app.post('/api/koszyk', (req, res) => {
+  const { userId, product } = req.body;
+
+  if (!cartData[userId]) {
+    cartData[userId] = [];
+  }
+
+  cartData[userId].push(product);
+  res.status(200).send('Produkt dodany do koszyka');
+});
+
+// Endpoint do pobierania zawartości koszyka
+app.get('/api/koszyk/:userId', (req, res) => {
+  const { userId } = req.params;
+  res.json(cartData[userId] || []);
+});
+
+  
