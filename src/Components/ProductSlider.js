@@ -84,11 +84,15 @@ export default function Example() {
   };
 
   const handleAddToCart = async (product) => {
-    const userId = localStorage.getItem('userId'); // Pobierz userId z localStorage
-    if (!userId) {
-      console.error('Użytkownik nie jest zalogowany');
-      return;
-    }
+	const userId = localStorage.getItem('userId');
+	if (!userId) {
+	  // Dodaj produkt do koszyka w localStorage
+	  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+	  cart.push(product);
+	  localStorage.setItem('cart', JSON.stringify(cart));
+	  console.log('Produkt dodany do lokalnego koszyka');
+	  return;
+	}
 
     try {
       const response = await fetch('/api/koszyk', {

@@ -209,4 +209,20 @@ input:focus-visible {
   .cart-dropdown p {
 	padding: 10px;
   }
+
+  
+
+  /* Miniaturki koszyka hover */
+  .cart-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+  }
+  
+  .miniaturka {
+	width: 50px; /* Ustaw odpowiednią szerokość */
+	height: 50px; /* Ustaw odpowiednią wysokość */
+	margin-right: 10px; /* Dodaj margines */
+	object-fit: cover; /* Opcjonalnie, aby obrazy dobrze wyglądały */
+  }
   

@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outl
 import '../App.css'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const navigation = [
@@ -17,26 +18,40 @@ const Header = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
 	const [isCartHovered, setIsCartHovered] = useState(false);
+	const navigate = useNavigate();
   
 	useEffect(() => {
-	  // Załóżmy, że userId pochodzi z autentykacji/logowania
-	  const userId = "exampleUserId";
-	  fetch(`/api/koszyk/${userId}`)
-		.then(response => response.json())
-		.then(data => setCartItems(data))
-		.catch(error => console.error('Error:', error));
+		const token = localStorage.getItem('token');
+		const userId = localStorage.getItem('userId');
+	  
+		if (token) {
+		  setIsLoggedIn(true);
+		  // Wczytaj koszyk z serwera
+		  fetchCartItems();
+		} else {
+		  // Użytkownik nie jest zalogowany
+		  setIsLoggedIn(false);
+		  setCartItems([]); // Wyczyszczenie stanu koszyka w komponencie
+		  const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+		  setCartItems(localCart); // Ustawienie lokalnego koszyka
+		}
+	  }, []);
+	  
+	  
   
-	  const token = localStorage.getItem('token');
-	  if (token) {
-		setIsLoggedIn(true);
-	  }
-	}, []);
-  
-	const handleLogout = () => {
-	  localStorage.removeItem('token');
-	  setIsLoggedIn(false);
-	  toast.info('Wylogowano pomyślnie');
-	};
+	  const handleLogout = () => {
+		// Czyszczenie danych użytkownika i koszyka
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		localStorage.removeItem('cart'); // Upewnij się, że ta linia istnieje
+	  
+		setIsLoggedIn(false);
+		setCartItems([]);
+		toast.info('Wylogowano pomyślnie');
+		navigate('/');
+	  };
+	  
+
 
 	const fetchCartItems = async () => {
 		const userId = localStorage.getItem('userId');
@@ -108,11 +123,12 @@ const Header = () => {
 		  <div className="hidden lg:flex lg:flex-1 lg:justify-end">
 
 		  <div className="cart-icon"
-    onMouseEnter={() => {
-        setIsCartHovered(true);
-        fetchCartItems(); // Upewnij się, że ta funkcja działa prawidłowo
-        // Dodaj logikę aktualizacji liczby produktów w koszyku tutaj
-    }}
+   onMouseEnter={() => {
+  setIsCartHovered(true);
+  if (isLoggedIn) {
+    fetchCartItems(); // Ładuj koszyk tylko, gdy użytkownik jest zalogowany
+  }
+}}isCartHovered
     onMouseLeave={() => setIsCartHovered(false)}
 >
     <Link to="/koszyk" className="mr-4 text-white hover:text-orange-500">
@@ -124,7 +140,8 @@ const Header = () => {
             {cartItems.length > 0 ? (
                 <ul>
                     {cartItems.map((item, index) => (
-                        <li key={index}>{item.name} - {item.price}</li>
+                        <li className="cart-item" key={index}>{item.name} - {item.price} <img src={item.imageSrc} alt={item.name} className="miniaturka" /></li>
+						
                     ))}
                 </ul>
             ) : (
