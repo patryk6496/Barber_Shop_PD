@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { ToastContainer, toast } from 'react-toastify';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import image1 from '../Assets/Images/Slider_products/catalog-product-01.jpg';
@@ -111,6 +112,7 @@ export default function Example() {
     } catch (error) {
       console.error('Błąd', error);
     }
+	toast.success(`${product.name} dodany do koszyka!`);
   };
   
 
@@ -204,6 +206,8 @@ export default function Example() {
           </div>
         </div>
       </div>
+	  {/* Toast Container */}
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 }

@@ -226,4 +226,18 @@ app.get('/api/koszyk/:userId', (req, res) => {
   res.json(cartData[userId] || []);
 });
 
+// Endpoint do usuwania przedmiotu z koszyka
+app.delete('/api/koszyk/:userId/item/:itemId', (req, res) => {
+	const { userId, itemId } = req.params;
+  
+	// Sprawdzenie, czy koszyk dla danego użytkownika istnieje
+	if (!cartData[userId]) {
+	  return res.status(404).send('Koszyk nie znaleziony');
+	}
+  
+	// Usunięcie przedmiotu z koszyka
+	cartData[userId] = cartData[userId].filter(item => item.id !== parseInt(itemId));
+  
+	res.status(200).send('Przedmiot usunięty z koszyka');
+  });
   
