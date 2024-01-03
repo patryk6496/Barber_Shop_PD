@@ -226,3 +226,12 @@ input:focus-visible {
 	object-fit: cover; /* Opcjonalnie, aby obrazy dobrze wyglądały */
   }
   
+  .cart-button{
+	background-color:#f89369;
+	color: #000;
+  }
+
+  .cart-button:hover{
+	color: #fff;
+	background-color: #000;
+  }

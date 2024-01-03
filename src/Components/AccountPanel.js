@@ -88,11 +88,11 @@ const AccountPanel = () => {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Nowe hasło"
-                className="border p-2"
+                className="border p-2 mx-2"
               />
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2"
+                className="px-4 py-2 mx-2  cart-button"
               >
                 Resetuj
               </button>

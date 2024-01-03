@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const navigation = [
-  { name: 'Nasze Produkty', href: '#' },
+  { name: 'Nasze Produkty', href: '#products' },
   { name: 'Nasze Usługi', href: '#' },
   { name: 'Nasze Ceny', href: '#' },
 ]

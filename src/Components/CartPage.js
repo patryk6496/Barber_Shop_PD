@@ -66,7 +66,7 @@ const CartPage = () => {
               <div className="flex w-full flex-col px-4 py-4">
                 <span className="font-semibold">{item.name}</span>
                 <p className="text-lg font-bold">{item.price}zł</p>
-                <button onClick={() => handleRemove(item.id)} className="self-end rounded bg-red-500 px-2 py-1 text-white">Usuń</button>
+                <button onClick={() => handleRemove(item.id)} className="self-end rounded  px-2 py-1 cart-button">Usuń</button>
               </div>
             </div>
           ))}
@@ -105,8 +105,8 @@ const CartPage = () => {
             </svg>
           </div>
         </div>
-        <input type="text" name="credit-expiry" class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="MM/YY" />
-        <input type="text" name="credit-cvc" class="w-1/6 flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="CVC" />
+        <input type="text" name="credit-expiry" class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 mx-2" placeholder="MM/YY" />
+        <input type="text" name="credit-cvc" class="w-1/6 flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 mx-2" placeholder="CVC" />
       </div>
       <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">Adres rozliczeniowy</label>
       <div class="flex flex-col sm:flex-row">
@@ -116,9 +116,9 @@ const CartPage = () => {
             <img class="h-4 w-4 object-contain" src="https://flagpack.xyz/_nuxt/4c829b6c0131de7162790d2f897a90fd.svg" alt="" />
           </div>
         </div>
-		<input type="text" name="credit-expiry" class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Miasto" />
+		<input type="text" name="credit-expiry" class="w-full rounded-md border border-gray-200 px-2 py-3 mx-2 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Miasto" />
 
-        <input type="text" name="billing-zip" class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Kod pocztowy" />
+        <input type="text" name="billing-zip" class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 mx-2 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Kod" />
       </div>
 
     
@@ -137,7 +137,7 @@ const CartPage = () => {
       <p className="text-2xl font-semibold text-gray-900">{totalPrice.toFixed(2)} zł</p> {/* Display total price */}
     </div>
     </div>
-    <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Złóż zamówienie</button>
+    <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium cart-button">Złóż zamówienie</button>
   </div>
   <Footer/>
 </div>

@@ -119,7 +119,7 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="heading-slider">NASZE PRODUKTY</h2>
+        <h2 className="heading-slider"><a href="#products">NASZE PRODUKTY</a></h2>
 
         <div className="mt-6">
 		<Slider {...settings}>
@@ -149,7 +149,7 @@ export default function Example() {
       {/* Przycisk umieszczony poza kontenerem 'group' */}
       <button 
               onClick={() => handleAddToCart(product)}
-              className="mt-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="mt-3 w-full font-bold py-2 px-4 rounded cart-button"
             >
               Dodaj do zamówienia
             </button>
