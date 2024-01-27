@@ -1,135 +1,125 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 const LoginForm = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const navigate = useNavigate(); // Inicjalizacja useNavigate
-  
-	const handleEmailChange = (event) => {
-	  setEmail(event.target.value);
-	};
-  
-	const handlePasswordChange = (event) => {
-	  setPassword(event.target.value);
-	};
-  
-	const handleSubmit = (event) => {
-	  event.preventDefault();
-	  fetch('/api/login', {
-		method: 'POST',
-		headers: {
-		  'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ email, password }), // Uwaga: upewnij się, że backend oczekuje `email`, a nie `username`
-	  })
-	  .then(response => {
-		if (!response.ok) {
-		  throw new Error('Błąd logowania');
-		}
-		return response.json();
-	  })
-	  .then(data => {
-		localStorage.setItem('token', data.token);
-		localStorage.setItem('userId', data.userId);
-		console.log('Zalogowano'); // Wyświetlenie komunikatu w konsoli
-		toast.success('Zalogowano pomyślnie');
-		navigate('/'); // Przekierowanie do strony głównej
-	  })
-	  .catch(error => {
-		console.error('Error:', error);
-		console.log('Błąd logowania'); // Wyświetlenie komunikatu o błędzie
-	  });
-	};
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Inicjalizacja useNavigate
 
-	  
-	  
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }), // Uwaga: upewnij się, że backend oczekuje `email`, a nie `username`
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Błąd logowania');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.userId);
+        console.log('Zalogowano'); // Wyświetlenie komunikatu w konsoli
+        toast.success('Zalogowano pomyślnie');
+        navigate('/'); // Przekierowanie do strony głównej
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        console.log('Błąd logowania'); // Wyświetlenie komunikatu o błędzie
+      });
+  };
+
   return (
-<>
-      {/*
-        This example requires updating your template:
+    <>
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow">
+          <div className="py-16 md:py-24 lg:py-32">
+            <div className="mx-auto max-w-xl bg-[#f2f2f7] px-5 py-12 text-center md:px-10">
+              <h2 className="text-3xl font-bold md:text-5xl mb-5">
+                Zaloguj się
+              </h2>
 
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-			  <input
-  id="email"
-  name="email"
-  type="email"
-  autoComplete="email"
-  required
-  onChange={handleEmailChange} // Dodaj tę linię
-  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-/>
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div className="mt-2">
-			  <input
-  id="password"
-  name="password"
-  type="password"
-  autoComplete="current-password"
-  required
-  onChange={handlePasswordChange} // Dodaj tę linię
-  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-/>
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <form
+                onSubmit={handleSubmit}
+                className="mx-auto mb-4 max-w-sm pb-4"
+                method="POST"
               >
-               Zaloguj się
-              </button>
+                <div className="relative">
+                  <img
+                    alt=""
+                    src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f190b7e37f878_EnvelopeSimple.svg"
+                    className="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block"
+                  />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    onChange={handleEmailChange}
+                    className="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
+                    placeholder="Adres Email"
+                  />
+                </div>
+                <div className="relative mb-4 pb-2">
+                  <img
+                    alt=""
+                    src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f19601037f879_Lock-2.svg"
+                    className="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block"
+                  />
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    autoComplete="current-password"
+                    onChange={handlePasswordChange}
+                    className="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
+                    placeholder="Hasło"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="flex max-w-full grid-cols-2 flex-row items-center justify-center bg-orange-500 px-8 py-4 text-center font-semibold text-white transition [box-shadow:rgb(212,182,143)_-8px_8px] hover:[box-shadow:rgb(212,182,143)_0px_0px]"
+                >
+                  <p className="mr-6 font-bold">Zaloguj się</p>
+                  <div className="h-4 w-4 flex-none">
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 20 21"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Arrow Right</title>
+                      <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
+                    </svg>
+                  </div>
+                </button>
+              </form>
+              <Link to="/rejestracja" className="text-sm text-[#636262]">
+                Nie masz konta? <span aria-hidden="true">&rarr;</span>
+              </Link>
             </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
-          </p>
+          </div>
         </div>
+        <Footer />
       </div>
     </>
-);
+  );
 };
-  export default LoginForm;
+export default LoginForm;

@@ -1,4 +1,4 @@
-/* ukrycie niedostepnych godzin wizyy */
+/* ukrycie niedostepnych godzin wizyty */
 li.react-datepicker__time-list-item--disabled{
 	display: none;
 }

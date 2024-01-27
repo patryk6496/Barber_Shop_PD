@@ -9,6 +9,7 @@ import PricingCard from './PricingCard'
 import ContactForm from './ContactForm'
 import Footer from './Footer'
 import Beadr from './Beard'
+import Hero from './Hero'
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
 	<>
     <div className="App">
       <Header/>
+	  <Hero/>
 	  <Shaving/>
 	  <Skin/>
 	  <Beadr/>
