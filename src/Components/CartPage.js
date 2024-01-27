@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './Footer'
+import Header from './Header';
+import '../App.css'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -55,10 +57,12 @@ const CartPage = () => {
 
 
   return (
-    <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+	<div className='flex flex-col min-h-screen'>
+      <Header />
+      <div className="flex-grow grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 background-component">
        <div className="px-4 pt-8">
-        <p className="text-xl font-medium">Podsumowanie zamówienia</p>
-        <p className="text-gray-400">Sprawdź swoje przedmioty. I wybierz odpowiednią metodę wysyłki.</p>
+        <p className="text-xl font-medium text-white">Podsumowanie zamówienia</p>
+        <p className="text-white">Sprawdź swoje przedmioty. I wybierz odpowiednią metodę wysyłki.</p>
         <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
           {cartItems.map((item) => (
             <div key={item.id} className="flex flex-col rounded-lg bg-white sm:flex-row">
@@ -138,9 +142,10 @@ const CartPage = () => {
     </div>
     </div>
     <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium cart-button">Złóż zamówienie</button>
-  </div>
-  <Footer/>
-</div>
+	</div>
+	</div>
+      <Footer /> {/* Komponent Footer umieszczony na dole */}
+    </div>
 
 
   );

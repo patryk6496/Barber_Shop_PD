@@ -4,7 +4,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../Reservation.css';
 import { pl } from 'date-fns/locale';
 import Footer from './Footer';
+import Header from './Header';
 import { toast } from 'react-toastify';
+import '../App.css'
 
 // Rejestracja lokalizacji językowej dla Datepicker
 registerLocale('pl', pl);
@@ -76,8 +78,9 @@ const ReservationSystem = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow">
-        <div className="max-w-xl mx-auto p-5 bg-white shadow-md rounded-lg">
+	<Header/>
+      <div className="flex-grow flex items-center justify-center background-component">
+        <div className="w-full max-w-xl mx-auto p-5 bg-white shadow-md rounded-lg">
           <h1 className="text-2xl font-semibold text-center text-gray-700 mb-6">
             System Rezerwacji Wizyt
           </h1>

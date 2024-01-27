@@ -186,6 +186,12 @@ const Header = () => {
                   ))}
                 </div>
 
+				<Link to="/rezerwacja" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50">
+            Umów się na wizytę <span aria-hidden="true">&rarr;</span>
+          </Link>
+
+				
+
 				{isLoggedIn ? (
               <div className="py-6">
                 <Link to="/panel-konta" className="text-sm font-semibold leading-6 text-black hover:text-orange-500">
@@ -197,6 +203,10 @@ const Header = () => {
                 >
                   Wyloguj się
                 </button>
+
+				<Link to="/koszyk" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50">
+              Koszyk <span aria-hidden="true">&rarr;</span>
+            </Link>
               </div>
             ) : (
               <>

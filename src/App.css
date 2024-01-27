@@ -26,7 +26,8 @@
 }
 
 .container-header {
-  background-color: #131313;
+	height: 100px;
+  background-color: black;
 }
 
 .orange-baner {
@@ -233,4 +234,12 @@ input:focus-visible {
   .cart-button:hover{
 	color: #fff;
 	background-color: #000;
+  }
+
+
+  .background-component{
+	 background-image: url('./Assets/Images/backgorund-component.png');
+	 background-size: cover;
+	 background-position: center;
+	 background-repeat: no-repeat;
   }

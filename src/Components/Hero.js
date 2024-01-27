@@ -3,7 +3,7 @@ import '../App.css'
 
 const Hero = () => {
   return (
-    <div className="relative isolate px-6 pt-14 lg:px-8 bg-black">
+    <div className="relative isolate px-6 pt-14 lg:px-8 background-component">
       <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-white ring-1 ring-white">

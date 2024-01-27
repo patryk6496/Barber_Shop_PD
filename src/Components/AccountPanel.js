@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Footer from './Footer';
+import Header from './Header';
+import '../App.css'
+
 
 const AccountPanel = () => {
 
@@ -62,7 +66,9 @@ const AccountPanel = () => {
     setNewPassword('');
   };
   return (
-    <div className="container mx-auto p-4">
+	<div className="flex flex-col min-h-screen">
+      <Header />
+    <div className="container mx-auto p-4 background-component">
       <h1 className="text-2xl font-bold">Panel Konta</h1>
       {/* Tutaj można dodać więcej treści związanych z panelem użytkownika */}
 
@@ -100,42 +106,44 @@ const AccountPanel = () => {
           </div>
 
           <div className="p-6">
-        <h2 className="text-xl font-semibold">Twoje Najbliższe Wizyty</h2>
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-              <th scope="col" className="px-6 py-3">Data</th>
-              <th scope="col" className="px-6 py-3">Czas</th>
-              <th scope="col" className="px-6 py-3">Nazwa Usługi</th>
-              <th scope="col" className="px-6 py-3">Fryzjer</th>
-              <th scope="col" className="px-6 py-3">Cena</th>
-              <th scope="col" className="px-6 py-3">Komentarz</th>
+          <h2 className="text-xl font-semibold">Twoje Najbliższe Wizyty</h2>
+  <div className="overflow-x-scroll mt-4">
+    <table className="w-full text-sm text-left text-gray-500 shadow-lg rounded-lg overflow-hidden">
+      <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" className="px-6 py-3">Data</th>
+          <th scope="col" className="px-6 py-3">Czas</th>
+          <th scope="col" className="px-6 py-3">Nazwa Usługi</th>
+          <th scope="col" className="px-6 py-3">Fryzjer</th>
+          <th scope="col" className="px-6 py-3">Cena</th>
+          <th scope="col" className="px-6 py-3">Komentarz</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rezerwacje.length > 0 ? (
+          rezerwacje.map((rez) => (
+            <tr key={rez.id} className="bg-white border-b hover:bg-gray-100">
+              <td className="px-6 py-4">{rez.data}</td>
+              <td className="px-6 py-4">{rez.czas}</td>
+              <td className="px-6 py-4">{rez.nazwa_uslugi}</td>
+              <td className="px-6 py-4">{rez.nazwa_fryzjera}</td>
+              <td className="px-6 py-4">{rez.cena}</td>
+              <td className="px-6 py-4">{rez.komentarz}</td>
             </tr>
-          </thead>
-		  <tbody>
-  {rezerwacje.length > 0 ? (
-    rezerwacje.map((rez) => (
-      <tr key={rez.id} className="bg-white border-b">
-        <td className="px-6 py-4">{rez.data}</td>
-        <td className="px-6 py-4">{rez.czas}</td>
-        <td className="px-6 py-4">{rez.nazwa_uslugi}</td>
-        <td className="px-6 py-4">{rez.nazwa_fryzjera}</td>
-        <td className="px-6 py-4">{rez.cena}</td>
-        <td className="px-6 py-4">{rez.komentarz}</td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="6" className="px-6 py-4 text-center">Nie masz jeszcze wizyt.</td>
-    </tr>
-  )}
-</tbody>
-
-
-        </table>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="6" className="px-6 py-4 text-center">Nie masz jeszcze wizyt.</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
       </div>
         </div>
       </div>
+    </div>
+      <Footer />
     </div>
   );
 };

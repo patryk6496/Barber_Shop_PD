@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import Header from './Header';
+import '../App.css'
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -48,7 +50,8 @@ const LoginForm = () => {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <div className="flex-grow">
+	  <Header/>
+        <div className="flex-grow background-component">
           <div className="py-16 md:py-24 lg:py-32">
             <div className="mx-auto max-w-xl bg-[#f2f2f7] px-5 py-12 text-center md:px-10">
               <h2 className="text-3xl font-bold md:text-5xl mb-5">
