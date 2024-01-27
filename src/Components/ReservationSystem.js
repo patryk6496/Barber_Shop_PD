@@ -158,12 +158,23 @@ const ReservationSystem = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="w-full py-3 px-4 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-md shadow"
-            >
-              Zarezerwuj
-            </button>
+			<button
+  type="submit"
+  className="flex max-w-full grid-cols-2 flex-row items-center justify-center bg-orange-500 px-8 py-4 text-center font-semibold text-white transition [box-shadow:rgb(212,182,143)_-8px_8px] hover:[box-shadow:rgb(212,182,143)_0px_0px]"
+>
+  <p className="mr-6 font-bold">Zarezerwuj wizytę</p>
+  <div className="h-4 w-4 flex-none">
+    <svg
+      fill="currentColor"
+      viewBox="0 0 20 21"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>Arrow Right</title>
+      <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
+    </svg>
+  </div>
+</button>
+
           </form>
         </div>
       </div>
