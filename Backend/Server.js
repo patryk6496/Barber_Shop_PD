@@ -191,12 +191,12 @@ app.listen(port, () => {
 
 //Endpoint do robienia zamowienia
 app.post('/api/zamowienia', async (req, res) => {
-	const { userId, productId, price } = req.body;
+	const { userId, id_produkty, wartosc_zamowienia } = req.body;
+  
 	try {
-	  // Dodaj zamówienie do bazy danych
 	  const noweZamowienie = await pool.query(
 		'INSERT INTO zamowienia (id_uzytkownika, id_produktu, wartosc_zamowienia) VALUES ($1, $2, $3) RETURNING *',
-		[userId, productId, price]
+		[userId, id_produkty, wartosc_zamowienia]
 	  );
 	  res.json(noweZamowienie.rows[0]);
 	} catch (err) {
@@ -204,6 +204,34 @@ app.post('/api/zamowienia', async (req, res) => {
 	  res.status(500).send('Błąd serwera');
 	}
   });
+  
+
+// Endpoint do pobierania zamówień użytkownika
+app.get('/api/zamowienia/:userId', async (req, res) => {
+	const { userId } = req.params;
+  
+	try {
+	  const zamowienia = await pool.query(
+		'SELECT * FROM zamowienia WHERE id_uzytkownika = $1',
+		[userId]
+	  );
+	  res.json(zamowienia.rows);
+	} catch (err) {
+	  console.error(err.message);
+	  res.status(500).send('Błąd serwera');
+	}
+  });
+  
+  
+
+//czyszczenie koszyka po zlozeniu zamowninia
+  app.post('/api/koszyk/:userId/clear', (req, res) => {
+	const { userId } = req.params;
+	// Wyczyszcz koszyk dla tego użytkownika
+	cartData[userId] = [];
+	res.status(200).send('Koszyk został wyczyszczony');
+  });
+  
 
 
   // Endpoint do koszyka

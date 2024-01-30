@@ -53,13 +53,53 @@ const CartPage = () => {
    const subtotal = cartItems.reduce((total, item) => total + parseFloat(item.price), 0); // Suma częściowa
    const totalPrice = subtotal + deliveryCost; // Całkowita suma
 
+
+
+//tworzenie niby zamowenia
+const handleSubmit = async () => {
+	try {
+	  const userId = localStorage.getItem('userId');
+	  const productIds = cartItems.map(item => item.id); // Zbieranie identyfikatorów produktów
+  
+	  // Wysyłanie całego zamówienia do backendu
+	  const response = await fetch('/api/zamowienia', {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+		  userId: userId,
+		  id_produkty: productIds,
+		  wartosc_zamowienia: totalPrice, // Przesyłanie całkowitej wartości zamówienia
+		}),
+	  });
+  
+	  const responseData = await response.json();
+	  if (!response.ok) {
+		throw new Error(responseData.message || 'Błąd podczas składania zamówienia');
+	  }
+  
+	  // Wyczyszczenie koszyka i dodatkowe wywołanie API do wyczyszczenia koszyka na backendzie
+	  setCartItems([]);
+	  await fetch(`/api/koszyk/${userId}/clear`, {
+		method: 'POST',
+	  });
+  
+	  alert('Zamówienie zostało złożone pomyślnie!');
+	} catch (error) {
+	  console.error('Błąd:', error);
+	  alert('Wystąpił błąd podczas składania zamówienia.');
+	}
+  };
+  
+  
    
 
 
   return (
 	<div className='flex flex-col min-h-screen'>
       <Header />
-      <div className="flex-grow grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 background-component">
+      <div className="flex-grow grid pt-7 pb-7 sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 background-component">
        <div className="px-4 pt-8">
         <p className="text-xl font-medium text-white">Podsumowanie zamówienia</p>
         <p className="text-white">Sprawdź swoje przedmioty. I wybierz odpowiednią metodę wysyłki.</p>
@@ -141,7 +181,7 @@ const CartPage = () => {
       <p className="text-2xl font-semibold text-gray-900">{totalPrice.toFixed(2)} zł</p> {/* Display total price */}
     </div>
     </div>
-    <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium cart-button">Złóż zamówienie</button>
+    <button onClick={handleSubmit} class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium cart-button">Złóż zamówienie</button>
 	</div>
 	</div>
       <Footer /> {/* Komponent Footer umieszczony na dole */}
