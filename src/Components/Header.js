@@ -78,16 +78,27 @@ const Header = () => {
             </a>
 			<a href="#"><span className="text-white hover:text-orange-500">Barber Shop</span></a>
           </div>
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <span className="sr-only">Otwórz główne menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
+		  <div className="flex lg:hidden">
+  {/* Kontener dla ikon */}
+  <div className="flex items-center">
+    {/* Link do koszyka z ikonką */}
+    <Link to="/koszyk" className="mr-4 text-white hover:text-orange-500">
+      <ShoppingCartIcon className="h-6 w-6" />
+      <span>Koszyk ({cartItems.length})</span>
+    </Link>
+
+    {/* Ikonka Hamburgera */}
+    <button
+      type="button"
+      className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
+      onClick={() => setMobileMenuOpen(true)}
+    >
+      <span className="sr-only">Otwórz główne menu</span>
+      <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+    </button>
+  </div>
+</div>
+
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
               <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
@@ -151,7 +162,7 @@ const Header = () => {
     )}
 </div>
 
-		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500">
+		  <Link to="/rezerwacja" className="text-sm font-semibold leading-6 text-white hover:text-orange-500 flex items-center">
   Umów się na wizyte <span aria-hidden="true">&rarr;</span>
 </Link>
           </div>
