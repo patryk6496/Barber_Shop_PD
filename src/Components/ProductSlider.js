@@ -69,7 +69,8 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="heading-slider"><a href="#products">NASZE PRODUKTY</a></h2>
+	  <h2 id="products" className="heading-slider">NASZE PRODUKTY</h2>
+
 
         <div className="mt-6">
 		<Slider {...settings}>
